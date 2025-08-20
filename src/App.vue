@@ -53,11 +53,21 @@ onUnmounted(() => {
                 </div>
                 <div>
                   <h1
-                    class="text-xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent"
+                    class="text-xl font-bold transition-all duration-300"
+                    :class="
+                      scrolled
+                        ? 'bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent'
+                        : 'text-white'
+                    "
                   >
                     Psic. Diana Campos
                   </h1>
-                  <p class="text-xs text-gray-500 font-medium">Consultorio Virtual</p>
+                  <p
+                    class="text-xs font-medium transition-all duration-300"
+                    :class="scrolled ? 'text-gray-500' : 'text-white/80'"
+                  >
+                    Consultorio Virtual
+                  </p>
                 </div>
               </div>
             </div>
