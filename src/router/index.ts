@@ -37,6 +37,21 @@ const router = createRouter({
       name: 'dashboard',
       component: () => import('../views/DashboardView.vue'),
     },
+    {
+      path: '/dashboard-psicologa',
+      name: 'dashboard-psicologa',
+      component: () => import('../views/DashboardPsicologaView.vue'),
+    },
+    {
+      path: '/dashboard-admin',
+      name: 'dashboard-admin',
+      component: () => import('../views/DashboardAdminView.vue'),
+    },
+    {
+      path: '/login-form',
+      name: 'login-form',
+      component: () => import('../components/LoginForm.vue'),
+    },
   ],
 })
 

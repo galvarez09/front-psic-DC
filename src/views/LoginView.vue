@@ -254,6 +254,28 @@
           </button>
         </div>
 
+        <!-- Información de Roles -->
+        <div class="mt-6 pt-6 border-t border-gray-200">
+          <h3 class="text-sm font-medium text-gray-700 mb-3 text-center">Acceso por Roles (Demo):</h3>
+          <div class="space-y-2 text-xs text-gray-600">
+            <div class="flex items-center justify-center space-x-2">
+              <div class="w-2 h-2 bg-purple-500 rounded-full"></div>
+              <span><strong>Psicóloga:</strong> diana@consultorio.com</span>
+            </div>
+            <div class="flex items-center justify-center space-x-2">
+              <div class="w-2 h-2 bg-indigo-500 rounded-full"></div>
+              <span><strong>Administrador:</strong> admin@consultorio.com</span>
+            </div>
+            <div class="flex items-center justify-center space-x-2">
+              <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+              <span><strong>Paciente:</strong> paciente@consultorio.com</span>
+            </div>
+          </div>
+          <p class="text-xs text-gray-500 mt-3 text-center">
+            <strong>Contraseña:</strong> Cualquier contraseña (demo)
+          </p>
+        </div>
+
         <!-- Enlace para registrarse -->
         <div class="text-center">
           <p class="text-sm text-gray-600">
@@ -311,8 +333,22 @@ const handleLogin = async () => {
     // Aquí iría la lógica real de autenticación
     console.log('Iniciando sesión con:', form)
 
-    // Redirigir al dashboard o página principal
-    router.push('/dashboard')
+    // Simular diferentes roles según el email
+    let rol = 'paciente'
+    if (form.email.includes('diana') || form.email.includes('psicologo')) {
+      rol = 'psicologo'
+    } else if (form.email.includes('admin') || form.email.includes('administrador')) {
+      rol = 'admin'
+    }
+
+    // Redirigir según el rol
+    if (rol === 'psicologo') {
+      router.push('/dashboard-psicologa')
+    } else if (rol === 'admin') {
+      router.push('/dashboard-admin')
+    } else {
+      router.push('/menu-principal')
+    }
   } catch (error) {
     console.error('Error al iniciar sesión:', error)
   } finally {

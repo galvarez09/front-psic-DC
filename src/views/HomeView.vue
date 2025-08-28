@@ -32,7 +32,7 @@ const handleScroll = () => {
     scrolled.value = window.scrollY > 50
 
   // Detectar la sección actual basada en el scroll
-  const sections = ['inicio', 'servicios', 'acerca', 'contacto']
+  const sections = ['inicio', 'servicios', 'acerca', 'contacto', 'roles']
   const navHeight = 80 // Altura de la navegación
   const scrollPosition = window.scrollY + navHeight + 120 // 120px de offset para mejor detección
 
@@ -96,7 +96,7 @@ onMounted(() => {
     // Verificar si hay un hash en la URL al cargar la página
     if (window.location.hash) {
       const hash = window.location.hash.substring(1)
-      if (['inicio', 'servicios', 'acerca', 'contacto'].includes(hash)) {
+      if (['inicio', 'servicios', 'acerca', 'contacto', 'roles'].includes(hash)) {
         currentSection.value = hash
         // Hacer scroll a la sección después de un pequeño delay para que la página se renderice
         setTimeout(() => {
@@ -398,6 +398,28 @@ onUnmounted(() => {
               />
             </svg>
             Contacto
+          </button>
+
+          <button
+            @click="() => { scrollToSection('roles'); mobileMenuOpen = false; }"
+            class="group flex items-center px-4 py-3 rounded-xl text-base font-medium text-gray-700 hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 hover:text-purple-600 transition-all duration-300"
+            :class="currentSection === 'roles' ? 'bg-gradient-to-r from-purple-50 to-pink-50 text-purple-600' : ''"
+          >
+            <svg
+              class="w-5 h-5 mr-3 transition-colors"
+              :class="currentSection === 'roles' ? 'text-purple-600' : 'text-gray-400 group-hover:text-purple-600'"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"
+              />
+            </svg>
+            Roles
           </button>
           <div class="pt-4 pb-2 border-t border-gray-200/50 space-y-2">
             <router-link
@@ -827,7 +849,7 @@ onUnmounted(() => {
     <div class="fixed right-6 top-1/2 transform -translate-y-1/2 z-40 hidden lg:block">
       <div class="flex flex-col space-y-4">
         <button
-          v-for="section in ['inicio', 'servicios', 'acerca', 'contacto']"
+          v-for="section in ['inicio', 'servicios', 'acerca', 'contacto', 'roles']"
           :key="section"
           @click="scrollToSection(section)"
           class="group relative w-3 h-3 rounded-full transition-all duration-300"
@@ -871,6 +893,105 @@ onUnmounted(() => {
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
       </svg>
     </button>
+
+    <!-- Sección de Roles y Dashboards -->
+    <section id="roles" class="py-20 bg-gradient-to-br from-gray-50 to-gray-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Acceso por Roles</h2>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            Nuestro sistema está diseñado para diferentes tipos de usuarios, cada uno con su dashboard especializado
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- Dashboard de Paciente -->
+          <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+            <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center mb-6 mx-auto">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-4">Dashboard de Paciente</h3>
+            <p class="text-gray-600 mb-6">
+              Accede a tu historial de citas, agenda nuevas sesiones y gestiona tu perfil personal
+            </p>
+            <router-link
+              to="/menu-principal"
+              class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-green-600 to-emerald-600 text-white font-semibold rounded-xl hover:from-green-700 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+            >
+              Acceder como Paciente
+              <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </router-link>
+          </div>
+
+          <!-- Dashboard de Psicóloga -->
+          <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+            <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center mb-6 mx-auto">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-4">Dashboard Profesional</h3>
+            <p class="text-gray-600 mb-6">
+              Gestiona pacientes, citas y sesiones desde tu panel profesional especializado
+            </p>
+            <router-link
+              to="/dashboard-psicologa"
+              class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-xl hover:from-purple-700 hover:to-pink-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+            >
+              Acceder como Psicóloga
+              <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </router-link>
+          </div>
+
+          <!-- Dashboard de Administrador -->
+          <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+            <div class="w-16 h-16 bg-gradient-to-br from-indigo-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6 mx-auto">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-4">Panel de Administración</h3>
+            <p class="text-gray-600 mb-6">
+              Control total del sistema, gestión de usuarios, reportes y configuración avanzada
+            </p>
+            <router-link
+              to="/dashboard-admin"
+              class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 text-white font-semibold rounded-xl hover:from-indigo-700 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+            >
+              Acceder como Admin
+              <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </router-link>
+          </div>
+        </div>
+
+        <!-- Información adicional -->
+        <div class="mt-16 text-center">
+          <div class="bg-white p-8 rounded-2xl shadow-lg max-w-4xl mx-auto">
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">¿No sabes qué rol usar?</h3>
+            <p class="text-gray-600 mb-6">
+              Para acceder a los dashboards especializados, primero debes iniciar sesión con las credenciales correspondientes
+            </p>
+            <router-link
+              to="/login"
+              class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-xl hover:from-purple-700 hover:to-pink-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+            >
+              Ir al Login
+              <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </router-link>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- Footer -->
     <footer class="bg-gray-900 text-white py-12">
