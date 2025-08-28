@@ -1,28 +1,121 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, nextTick } from 'vue'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const mobileMenuOpen = ref(false)
 const scrolled = ref(false)
+const currentSection = ref('inicio')
+
+// Función para throttling del scroll
+let ticking = false
+const throttledHandleScroll = () => {
+  if (!ticking) {
+    requestAnimationFrame(() => {
+      handleScroll()
+      ticking = false
+    })
+    ticking = true
+  }
+}
 
 const toggleMobileMenu = () => {
   mobileMenuOpen.value = !mobileMenuOpen.value
 }
 
 const handleScroll = () => {
-  scrolled.value = window.scrollY > 50
+  // Verificar que window y document estén disponibles
+  if (typeof window === 'undefined' || typeof document === 'undefined') {
+    return
+  }
+
+    scrolled.value = window.scrollY > 50
+
+  // Detectar la sección actual basada en el scroll
+  const sections = ['inicio', 'servicios', 'acerca', 'contacto']
+  const navHeight = 80 // Altura de la navegación
+  const scrollPosition = window.scrollY + navHeight + 120 // 120px de offset para mejor detección
+
+  let newSection = 'inicio'
+
+  for (let i = sections.length - 1; i >= 0; i--) {
+    const section = document.getElementById(sections[i])
+    if (section) {
+      const sectionTop = section.offsetTop
+      const sectionHeight = section.offsetHeight
+
+      if (scrollPosition >= sectionTop) {
+        newSection = sections[i]
+        break
+      }
+    }
+  }
+
+  if (currentSection.value !== newSection) {
+    currentSection.value = newSection
+    // Actualizar la URL sin recargar la página
+    router.replace({
+      path: '/',
+      hash: `#${newSection}`
+    })
+  }
+}
+
+// Función para hacer scroll suave a una sección
+const scrollToSection = (sectionId: string) => {
+  // Verificar que document esté disponible
+  if (typeof document === 'undefined') {
+    return
+  }
+
+  const section = document.getElementById(sectionId)
+  if (section) {
+    // Calcular la posición exacta considerando la altura de la navegación
+    const navHeight = 80 // Altura de la navegación
+    const sectionTop = section.offsetTop - navHeight - 20 // 20px de margen adicional
+
+    // Hacer scroll suave a la posición calculada
+    window.scrollTo({
+      top: Math.max(0, sectionTop), // Evitar valores negativos
+      behavior: 'smooth'
+    })
+
+    // Actualizar la sección actual inmediatamente
+    currentSection.value = sectionId
+  }
 }
 
 onMounted(() => {
-  window.addEventListener('scroll', handleScroll)
+  // Esperar a que el DOM esté completamente renderizado
+  nextTick(() => {
+    window.addEventListener('scroll', throttledHandleScroll)
+
+    // Calcular el progreso inicial del scroll
+    handleScroll()
+
+    // Verificar si hay un hash en la URL al cargar la página
+    if (window.location.hash) {
+      const hash = window.location.hash.substring(1)
+      if (['inicio', 'servicios', 'acerca', 'contacto'].includes(hash)) {
+        currentSection.value = hash
+        // Hacer scroll a la sección después de un pequeño delay para que la página se renderice
+        setTimeout(() => {
+          scrollToSection(hash)
+        }, 200)
+      }
+    }
+  })
 })
 
 onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll)
+  window.removeEventListener('scroll', throttledHandleScroll)
 })
 </script>
 
 <template>
   <div class="min-h-screen bg-gray-50">
+
+
     <!-- Navegación Moderna -->
     <nav
       class="fixed w-full z-50 transition-all duration-300"
@@ -75,53 +168,89 @@ onUnmounted(() => {
 
           <!-- Navegación Desktop Moderna -->
           <div class="hidden lg:block">
-            <div class="ml-10 flex items-baseline space-x-1">
-              <a
-                href="#inicio"
-                class="group relative px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 hover:bg-purple-50 hover:text-purple-600"
-                :class="scrolled ? 'text-gray-700' : 'text-white'"
+            <div class="ml-10 flex items-baseline space-x-6 relative pb-3">
+              <!-- Indicador de sección activa mejorado -->
+              <div
+                class="absolute -bottom-1 h-1.5 bg-gradient-to-r from-purple-600 to-pink-600 transition-all duration-700 ease-out rounded-full shadow-lg"
+                :style="{
+                  width: '90px',
+                  transform: `translateX(${['inicio', 'servicios', 'acerca', 'contacto'].indexOf(currentSection) * 144}px)`
+                }"
+              >
+                <!-- Efecto de brillo -->
+                <div class="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent rounded-full"></div>
+              </div>
+              <button
+                @click="scrollToSection('inicio')"
+                class="group relative px-6 py-3 rounded-xl text-sm font-medium transition-all duration-300 hover:scale-105"
+                :class="[
+                  scrolled ? 'text-gray-700' : 'text-white',
+                  currentSection === 'inicio' ? 'text-purple-600 font-semibold' : ''
+                ]"
               >
                 <span class="relative z-10">Inicio</span>
                 <div
-                  class="absolute inset-0 bg-gradient-to-r from-purple-100 to-pink-100 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  class="absolute inset-0 bg-gradient-to-r from-purple-100 to-pink-100 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-300 rounded-xl"
+                  :class="currentSection === 'inicio' ? 'opacity-100' : ''"
                 ></div>
-              </a>
-              <a
-                href="#servicios"
-                class="group relative px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 hover:bg-purple-50 hover:text-purple-600"
-                :class="scrolled ? 'text-gray-700' : 'text-white'"
+              </button>
+              <button
+                @click="scrollToSection('servicios')"
+                class="group relative px-6 py-3 rounded-xl text-sm font-medium transition-all duration-300 hover:scale-105"
+                :class="[
+                  scrolled ? 'text-gray-700' : 'text-white',
+                  currentSection === 'servicios' ? 'text-purple-600 font-semibold' : ''
+                ]"
               >
                 <span class="relative z-10">Servicios</span>
                 <div
-                  class="absolute inset-0 bg-gradient-to-r from-purple-100 to-pink-100 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  class="absolute inset-0 bg-gradient-to-r from-purple-100 to-pink-100 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-300 rounded-xl"
+                  :class="currentSection === 'servicios' ? 'opacity-100' : ''"
                 ></div>
-              </a>
-              <a
-                href="#acerca"
-                class="group relative px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 hover:bg-purple-50 hover:text-purple-600"
-                :class="scrolled ? 'text-gray-700' : 'text-white'"
+              </button>
+              <button
+                @click="scrollToSection('acerca')"
+                class="group relative px-6 py-3 rounded-xl text-sm font-medium transition-all duration-300 hover:scale-105"
+                :class="[
+                  scrolled ? 'text-gray-700' : 'text-white',
+                  currentSection === 'acerca' ? 'text-purple-600 font-semibold' : ''
+                ]"
               >
                 <span class="relative z-10">Acerca de</span>
                 <div
-                  class="absolute inset-0 bg-gradient-to-r from-purple-100 to-pink-100 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  class="absolute inset-0 bg-gradient-to-r from-purple-100 to-pink-100 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-300 rounded-xl"
+                  :class="currentSection === 'acerca' ? 'opacity-100' : ''"
                 ></div>
-              </a>
-              <a
-                href="#contacto"
-                class="group relative px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 hover:bg-purple-50 hover:text-purple-600"
-                :class="scrolled ? 'text-gray-700' : 'text-white'"
+              </button>
+              <button
+                @click="scrollToSection('contacto')"
+                class="group relative px-6 py-3 rounded-xl text-sm font-medium transition-all duration-300 hover:scale-105"
+                :class="[
+                  scrolled ? 'text-gray-700' : 'text-white',
+                  currentSection === 'contacto' ? 'text-purple-600 font-semibold' : ''
+                ]"
               >
                 <span class="relative z-10">Contacto</span>
                 <div
-                  class="absolute inset-0 bg-gradient-to-r from-purple-100 to-pink-100 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  class="absolute inset-0 bg-gradient-to-r from-purple-100 to-pink-100 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-300 rounded-xl"
+                  :class="currentSection === 'contacto' ? 'opacity-100' : ''"
                 ></div>
-              </a>
+              </button>
             </div>
           </div>
 
           <!-- Botones de acción modernos -->
           <div class="hidden lg:block">
             <div class="ml-4 flex items-center space-x-3">
+              <router-link
+                to="/menu-principal"
+                class="group relative px-6 py-2.5 rounded-xl text-sm font-semibold text-white transition-all duration-300 overflow-hidden bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+              >
+                <span class="relative z-10">Menú Principal</span>
+                <div
+                  class="absolute inset-0 bg-gradient-to-r from-green-700 to-emerald-700 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                ></div>
+              </router-link>
               <router-link
                 to="/login"
                 class="group relative px-6 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 overflow-hidden"
@@ -142,7 +271,7 @@ onUnmounted(() => {
               >
                 <span class="relative z-10">Registrarse</span>
                 <div
-                  class="absolute inset-0 bg-gradient-to-r from-purple-700 to-pink-700 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  class="absolute inset-0 bg-gradient-to-r from-purple-700 to-emerald-700 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                 ></div>
               </router-link>
             </div>
@@ -186,12 +315,14 @@ onUnmounted(() => {
         <div
           class="px-4 pt-2 pb-6 space-y-2 bg-white/95 backdrop-blur-md border-t border-gray-200/50"
         >
-          <a
-            href="#inicio"
+          <button
+            @click="() => { scrollToSection('inicio'); mobileMenuOpen = false; }"
             class="group flex items-center px-4 py-3 rounded-xl text-base font-medium text-gray-700 hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 hover:text-purple-600 transition-all duration-300"
+            :class="currentSection === 'inicio' ? 'bg-gradient-to-r from-purple-50 to-pink-50 text-purple-600' : ''"
           >
             <svg
-              class="w-5 h-5 mr-3 text-gray-400 group-hover:text-purple-600 transition-colors"
+              class="w-5 h-5 mr-3 transition-colors"
+              :class="currentSection === 'inicio' ? 'text-purple-600' : 'text-gray-400 group-hover:text-purple-600'"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -204,13 +335,15 @@ onUnmounted(() => {
               />
             </svg>
             Inicio
-          </a>
-          <a
-            href="#servicios"
+          </button>
+          <button
+            @click="() => { scrollToSection('servicios'); mobileMenuOpen = false; }"
             class="group flex items-center px-4 py-3 rounded-xl text-base font-medium text-gray-700 hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 hover:text-purple-600 transition-all duration-300"
+            :class="currentSection === 'servicios' ? 'bg-gradient-to-r from-purple-50 to-pink-50 text-purple-600' : ''"
           >
             <svg
-              class="w-5 h-5 mr-3 text-gray-400 group-hover:text-purple-600 transition-colors"
+              class="w-5 h-5 mr-3 transition-colors"
+              :class="currentSection === 'servicios' ? 'text-purple-600' : 'text-gray-400 group-hover:text-purple-600'"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -223,13 +356,15 @@ onUnmounted(() => {
               />
             </svg>
             Servicios
-          </a>
-          <a
-            href="#acerca"
+          </button>
+          <button
+            @click="() => { scrollToSection('acerca'); mobileMenuOpen = false; }"
             class="group flex items-center px-4 py-3 rounded-xl text-base font-medium text-gray-700 hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 hover:text-purple-600 transition-all duration-300"
+            :class="currentSection === 'acerca' ? 'bg-gradient-to-r from-purple-50 to-pink-50 text-purple-600' : ''"
           >
             <svg
-              class="w-5 h-5 mr-3 text-gray-400 group-hover:text-purple-600 transition-colors"
+              class="w-5 h-5 mr-3 transition-colors"
+              :class="currentSection === 'acerca' ? 'text-purple-600' : 'text-gray-400 group-hover:text-purple-600'"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -242,13 +377,15 @@ onUnmounted(() => {
               />
             </svg>
             Acerca de
-          </a>
-          <a
-            href="#contacto"
+          </button>
+          <button
+            @click="() => { scrollToSection('contacto'); mobileMenuOpen = false; }"
             class="group flex items-center px-4 py-3 rounded-xl text-base font-medium text-gray-700 hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 hover:text-purple-600 transition-all duration-300"
+            :class="currentSection === 'contacto' ? 'bg-gradient-to-r from-purple-50 to-pink-50 text-purple-600' : ''"
           >
             <svg
-              class="w-5 h-5 mr-3 text-gray-400 group-hover:text-purple-600 transition-colors"
+              class="w-5 h-5 mr-3 transition-colors"
+              :class="currentSection === 'contacto' ? 'text-purple-600' : 'text-gray-400 group-hover:text-purple-600'"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -261,8 +398,22 @@ onUnmounted(() => {
               />
             </svg>
             Contacto
-          </a>
+          </button>
           <div class="pt-4 pb-2 border-t border-gray-200/50 space-y-2">
+            <router-link
+              to="/menu-principal"
+              class="w-full flex items-center px-4 py-3 rounded-xl text-base font-medium text-white bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 transition-all duration-300 shadow-lg"
+            >
+              <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+              Menú Principal
+            </router-link>
             <router-link
               to="/login"
               class="group w-full flex items-center px-4 py-3 rounded-xl text-base font-medium text-purple-600 hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 transition-all duration-300"
@@ -310,14 +461,15 @@ onUnmounted(() => {
             Cuidando tu bienestar mental desde la comodidad de tu hogar
           </p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <button
+            <router-link
+              to="/menu-principal"
               class="group relative px-8 py-3 rounded-xl font-semibold text-lg transition-all duration-300 overflow-hidden bg-white text-purple-600 hover:text-purple-700 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
             >
-              <span class="relative z-10">Agendar Cita</span>
+              <span class="relative z-10">Acceder al Menú</span>
               <div
                 class="absolute inset-0 bg-gradient-to-r from-purple-50 to-pink-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
               ></div>
-            </button>
+            </router-link>
             <button
               class="group relative px-8 py-3 rounded-xl font-semibold text-lg transition-all duration-300 overflow-hidden border-2 border-white text-white hover:text-purple-600 hover:bg-white transform hover:-translate-y-0.5"
             >
@@ -356,10 +508,24 @@ onUnmounted(() => {
               </svg>
             </div>
             <h3 class="text-xl font-semibold text-gray-900 mb-4 text-center">Terapia Individual</h3>
-            <p class="text-gray-600 text-center">
+            <p class="text-gray-600 text-center mb-6">
               Sesiones personalizadas para abordar problemas específicos y desarrollar estrategias
               de afrontamiento efectivas.
             </p>
+            <!-- Botón de WhatsApp en servicios -->
+            <div class="text-center">
+              <a
+                href="https://wa.me/51994971261?text=Hola,%20me%20interesa%20la%20Terapia%20Individual"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center px-4 py-2 bg-green-500 hover:bg-green-600 text-white text-sm font-medium rounded-lg transition-colors duration-300"
+              >
+                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.87 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+                </svg>
+                Consultar
+              </a>
+            </div>
           </div>
 
           <div
@@ -378,9 +544,23 @@ onUnmounted(() => {
               </svg>
             </div>
             <h3 class="text-xl font-semibold text-gray-900 mb-4 text-center">Terapia de Pareja</h3>
-            <p class="text-gray-600 text-center">
+            <p class="text-gray-600 text-center mb-6">
               Mejora la comunicación y fortalece los lazos afectivos en tu relación de pareja.
             </p>
+            <!-- Botón de WhatsApp en servicios -->
+            <div class="text-center">
+              <a
+                href="https://wa.me/51994971261?text=Hola,%20me%20interesa%20la%20Terapia%20de%20Pareja"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center px-4 py-2 bg-green-500 hover:bg-green-600 text-white text-sm font-medium rounded-lg transition-colors duration-300"
+              >
+                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.87 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+                </svg>
+                Consultar
+              </a>
+            </div>
           </div>
 
           <div
@@ -399,9 +579,23 @@ onUnmounted(() => {
               </svg>
             </div>
             <h3 class="text-xl font-semibold text-gray-900 mb-4 text-center">Manejo del Estrés</h3>
-            <p class="text-gray-600 text-center">
+            <p class="text-gray-600 text-center mb-6">
               Aprende técnicas efectivas para manejar el estrés y la ansiedad en tu vida diaria.
             </p>
+            <!-- Botón de WhatsApp en servicios -->
+            <div class="text-center">
+              <a
+                href="https://wa.me/51994971261?text=Hola,%20me%20interesa%20el%20servicio%20de%20Manejo%20del%20Estrés"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center px-4 py-2 bg-green-500 hover:bg-green-600 text-white text-sm font-medium rounded-lg transition-colors duration-300"
+              >
+                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.87 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+                </svg>
+                Consultar
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -573,10 +767,22 @@ onUnmounted(() => {
                     />
                   </svg>
                 </div>
-                <div>
+                <div class="flex-1">
                   <p class="font-semibold text-gray-900">Teléfono</p>
                   <p class="text-gray-600">+51 994 971 261</p>
                 </div>
+                <!-- Botón de WhatsApp en contacto -->
+                <a
+                  href="https://wa.me/51994971261?text=Hola,%20me%20gustaría%20agendar%20una%20consulta%20psicológica"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="ml-3 px-4 py-2 bg-green-500 hover:bg-green-600 text-white text-sm font-medium rounded-lg transition-colors duration-300 flex items-center space-x-2"
+                >
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+                  </svg>
+                  <span>Chatear</span>
+                </a>
               </div>
             </div>
           </div>
@@ -616,6 +822,55 @@ onUnmounted(() => {
         </div>
       </div>
     </section>
+
+    <!-- Indicador de secciones en el lado derecho -->
+    <div class="fixed right-6 top-1/2 transform -translate-y-1/2 z-40 hidden lg:block">
+      <div class="flex flex-col space-y-4">
+        <button
+          v-for="section in ['inicio', 'servicios', 'acerca', 'contacto']"
+          :key="section"
+          @click="scrollToSection(section)"
+          class="group relative w-3 h-3 rounded-full transition-all duration-300"
+          :class="currentSection === section ? 'bg-purple-600 scale-125' : 'bg-gray-400 hover:bg-gray-600'"
+        >
+          <span
+            class="absolute right-8 top-1/2 transform -translate-y-1/2 bg-gray-900 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap"
+          >
+            {{ section.charAt(0).toUpperCase() + section.slice(1) }}
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Botón de WhatsApp flotante -->
+    <a
+      href="https://wa.me/51994971261?text=Hola,%20me%20gustaría%20agendar%20una%20consulta%20psicológica"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="fixed bottom-6 left-6 w-14 h-14 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 hover:scale-110 transition-all duration-300 z-40 group"
+    >
+      <!-- Icono de WhatsApp -->
+      <svg class="w-7 h-7 mx-auto mt-3.5" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+      </svg>
+
+      <!-- Tooltip -->
+      <div class="absolute left-16 top-1/2 transform -translate-y-1/2 bg-gray-900 text-white text-sm px-3 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none">
+        ¡Chatea con nosotros!
+        <div class="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-1 w-2 h-2 bg-gray-900 rotate-45"></div>
+      </div>
+    </a>
+
+    <!-- Botón de volver arriba -->
+    <button
+      v-show="scrolled"
+      @click="scrollToSection('inicio')"
+      class="fixed bottom-6 right-6 w-12 h-12 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 z-40"
+    >
+      <svg class="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+      </svg>
+    </button>
 
     <!-- Footer -->
     <footer class="bg-gray-900 text-white py-12">
