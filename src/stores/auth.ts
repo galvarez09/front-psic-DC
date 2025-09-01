@@ -1,149 +1,207 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
+import {
+  signInWithPopup,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
+  type User
+} from 'firebase/auth'
+import { auth, googleProvider } from '@/firebase/config'
+import { doc, setDoc, getDoc } from 'firebase/firestore'
+import { db } from '@/firebase/config'
 
-export interface Usuario {
-  id: number
-  nombre: string
+export interface UserProfile {
+  uid: string
   email: string
-  rol: 'paciente' | 'psicologo' | 'admin'
-  especialidad?: string
-  activo: boolean
-}
-
-export interface Sesion {
-  usuario: Usuario
-  token: string
-  expira: Date
+  displayName: string
+  photoURL: string
+  role: 'paciente' | 'psicologa' | 'admin'
+  createdAt: Date
+  lastLogin: Date
 }
 
 export const useAuthStore = defineStore('auth', () => {
-  // Estado
-  const sesion = ref<Sesion | null>(null)
-  const cargando = ref(false)
+  const user = ref<User | null>(null)
+  const userProfile = ref<UserProfile | null>(null)
+  const loading = ref(false)
   const error = ref<string | null>(null)
 
-  // Getters
-  const estaAutenticado = computed(() => sesion.value !== null)
-  const usuarioActual = computed(() => sesion.value?.usuario || null)
-  const rolUsuario = computed(() => sesion.value?.usuario.rol || null)
+  // Computed properties
+  const isAuthenticated = computed(() => !!user.value)
+  const isPaciente = computed(() => userProfile.value?.role === 'paciente')
+  const isPsicologa = computed(() => userProfile.value?.role === 'psicologa')
+  const isAdmin = computed(() => userProfile.value?.role === 'admin')
 
-  const esPaciente = computed(() => rolUsuario.value === 'paciente')
-  const esPsicologo = computed(() => rolUsuario.value === 'psicologo')
-  const esAdmin = computed(() => rolUsuario.value === 'admin')
+  // Inicializar el estado de autenticación
+  const initAuth = () => {
+    onAuthStateChanged(auth, async (firebaseUser) => {
+      user.value = firebaseUser
+      if (firebaseUser) {
+        await loadUserProfile(firebaseUser.uid)
+      } else {
+        userProfile.value = null
+      }
+    })
+  }
 
-  // Acciones
-  const iniciarSesion = async (email: string, password: string) => {
-    cargando.value = true
+  // Cargar perfil del usuario desde Firestore
+  const loadUserProfile = async (uid: string) => {
+    try {
+      const userDoc = await getDoc(doc(db, 'users', uid))
+      if (userDoc.exists()) {
+        userProfile.value = userDoc.data() as UserProfile
+      }
+    } catch (err) {
+      console.error('Error loading user profile:', err)
+    }
+  }
+
+  // Crear o actualizar perfil del usuario
+  const createUserProfile = async (firebaseUser: User, role: 'paciente' | 'psicologa' | 'admin' = 'paciente', displayName?: string) => {
+    const userData: UserProfile = {
+      uid: firebaseUser.uid,
+      email: firebaseUser.email || '',
+      displayName: displayName || firebaseUser.displayName || '',
+      photoURL: firebaseUser.photoURL || '',
+      role,
+      createdAt: new Date(),
+      lastLogin: new Date()
+    }
+
+    try {
+      await setDoc(doc(db, 'users', firebaseUser.uid), userData)
+      userProfile.value = userData
+    } catch (err) {
+      console.error('Error creating user profile:', err)
+      throw err
+    }
+  }
+
+  // Iniciar sesión con Google
+  const signInWithGoogle = async (role: 'paciente' | 'psicologa' | 'admin' = 'paciente') => {
+    loading.value = true
     error.value = null
 
     try {
-      // Simulación de API - En producción esto sería una llamada real
-      await new Promise(resolve => setTimeout(resolve, 1000))
+      const result = await signInWithPopup(auth, googleProvider)
+      const firebaseUser = result.user
 
-      // Simular diferentes usuarios según el email
-      let usuario: Usuario
+      // Verificar si el usuario ya existe
+      const userDoc = await getDoc(doc(db, 'users', firebaseUser.uid))
 
-      if (email.includes('diana') || email.includes('psicologo')) {
-        usuario = {
-          id: 1,
-          nombre: 'Psic. Diana Campos',
-          email: email,
-          rol: 'psicologo',
-          especialidad: 'Psicología Clínica',
-          activo: true
-        }
-      } else if (email.includes('admin') || email.includes('administrador')) {
-        usuario = {
-          id: 2,
-          nombre: 'Administrador del Sistema',
-          email: email,
-          rol: 'admin',
-          activo: true
-        }
+      if (!userDoc.exists()) {
+        // Usuario nuevo - crear perfil
+        await createUserProfile(firebaseUser, role)
       } else {
-        usuario = {
-          id: 3,
-          nombre: 'Paciente Demo',
-          email: email,
-          rol: 'paciente',
-          activo: true
-        }
+        // Usuario existente - actualizar último login
+        await loadUserProfile(firebaseUser.uid)
+        await setDoc(doc(db, 'users', firebaseUser.uid), {
+          lastLogin: new Date()
+        }, { merge: true })
       }
 
-      // Crear sesión simulada
-      const token = `token_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
-      const expira = new Date(Date.now() + 24 * 60 * 60 * 1000) // 24 horas
-
-      sesion.value = {
-        usuario,
-        token,
-        expira
-      }
-
-      // Guardar en localStorage
-      localStorage.setItem('sesion', JSON.stringify(sesion.value))
-
-      return usuario
-    } catch (err) {
-      error.value = 'Error al iniciar sesión'
+      return result
+    } catch (err: any) {
+      error.value = err.message || 'Error al iniciar sesión'
       throw err
     } finally {
-      cargando.value = false
+      loading.value = false
     }
   }
 
-  const cerrarSesion = () => {
-    sesion.value = null
-    localStorage.removeItem('sesion')
-  }
+  // Registrar con email y contraseña
+  const registerWithEmail = async (email: string, password: string, displayName: string, role: 'paciente' | 'psicologa' | 'admin' = 'paciente') => {
+    loading.value = true
+    error.value = null
 
-  const verificarSesion = () => {
-    const sesionGuardada = localStorage.getItem('sesion')
-    if (sesionGuardada) {
-      try {
-        const sesionData = JSON.parse(sesionGuardada)
-        const expira = new Date(sesionData.expira)
+    try {
+      const result = await createUserWithEmailAndPassword(auth, email, password)
+      const firebaseUser = result.user
 
-        if (expira > new Date()) {
-          sesion.value = sesionData
-        } else {
-          localStorage.removeItem('sesion')
-        }
-      } catch (err) {
-        localStorage.removeItem('sesion')
-      }
+      // Actualizar displayName en Firebase Auth
+      await firebaseUser.updateProfile({
+        displayName: displayName
+      })
+
+      // Crear perfil en Firestore
+      await createUserProfile(firebaseUser, role, displayName)
+
+      return result
+    } catch (err: any) {
+      error.value = err.message || 'Error al crear la cuenta'
+      throw err
+    } finally {
+      loading.value = false
     }
   }
 
-  const renovarSesion = () => {
-    if (sesion.value) {
-      const nuevaExpira = new Date(Date.now() + 24 * 60 * 60 * 1000)
-      sesion.value.expira = nuevaExpira
-      localStorage.setItem('sesion', JSON.stringify(sesion.value))
+  // Iniciar sesión con email y contraseña
+  const signInWithEmail = async (email: string, password: string) => {
+    loading.value = true
+    error.value = null
+
+    try {
+      const result = await signInWithEmailAndPassword(auth, email, password)
+      const firebaseUser = result.user
+
+      // Cargar perfil del usuario
+      await loadUserProfile(firebaseUser.uid)
+
+      // Actualizar último login
+      await setDoc(doc(db, 'users', firebaseUser.uid), {
+        lastLogin: new Date()
+      }, { merge: true })
+
+      return result
+    } catch (err: any) {
+      error.value = err.message || 'Error al iniciar sesión'
+      throw err
+    } finally {
+      loading.value = false
     }
   }
 
-  // Inicializar sesión al cargar el store
-  verificarSesion()
+  // Cerrar sesión
+  const logout = async () => {
+    loading.value = true
+    try {
+      await signOut(auth)
+      user.value = null
+      userProfile.value = null
+    } catch (err: any) {
+      error.value = err.message || 'Error al cerrar sesión'
+      throw err
+    } finally {
+      loading.value = false
+    }
+  }
+
+  // Limpiar error
+  const clearError = () => {
+    error.value = null
+  }
 
   return {
-    // Estado
-    sesion,
-    cargando,
+    // State
+    user,
+    userProfile,
+    loading,
     error,
 
-    // Getters
-    estaAutenticado,
-    usuarioActual,
-    rolUsuario,
-    esPaciente,
-    esPsicologo,
-    esAdmin,
+    // Computed
+    isAuthenticated,
+    isPaciente,
+    isPsicologa,
+    isAdmin,
 
-    // Acciones
-    iniciarSesion,
-    cerrarSesion,
-    verificarSesion,
-    renovarSesion
+    // Actions
+    initAuth,
+    signInWithGoogle,
+    registerWithEmail,
+    signInWithEmail,
+    logout,
+    clearError
   }
 })
