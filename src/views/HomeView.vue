@@ -185,13 +185,16 @@ onUnmounted(() => {
                 class="group relative px-6 py-3 rounded-xl text-sm font-medium transition-all duration-300 hover:scale-105"
                 :class="[
                   scrolled ? 'text-gray-700' : 'text-white',
-                  currentSection === 'inicio' ? 'text-purple-600 font-semibold' : ''
+                  currentSection === 'inicio' ? (scrolled ? 'text-purple-600' : 'text-white') + ' font-semibold' : ''
                 ]"
               >
                 <span class="relative z-10">Inicio</span>
                 <div
-                  class="absolute inset-0 bg-gradient-to-r from-purple-100 to-pink-100 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-300 rounded-xl"
-                  :class="currentSection === 'inicio' ? 'opacity-100' : ''"
+                  class="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-300"
+                  :class="[
+                    currentSection === 'inicio' ? 'opacity-100' : '',
+                    scrolled ? 'bg-gradient-to-r from-purple-100 to-pink-100' : 'bg-white/20'
+                  ]"
                 ></div>
               </button>
               <button
@@ -199,13 +202,16 @@ onUnmounted(() => {
                 class="group relative px-6 py-3 rounded-xl text-sm font-medium transition-all duration-300 hover:scale-105"
                 :class="[
                   scrolled ? 'text-gray-700' : 'text-white',
-                  currentSection === 'servicios' ? 'text-purple-600 font-semibold' : ''
+                  currentSection === 'servicios' ? (scrolled ? 'text-purple-600' : 'text-white') + ' font-semibold' : ''
                 ]"
               >
                 <span class="relative z-10">Servicios</span>
                 <div
-                  class="absolute inset-0 bg-gradient-to-r from-purple-100 to-pink-100 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-300 rounded-xl"
-                  :class="currentSection === 'servicios' ? 'opacity-100' : ''"
+                  class="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-300"
+                  :class="[
+                    currentSection === 'servicios' ? 'opacity-100' : '',
+                    scrolled ? 'bg-gradient-to-r from-purple-100 to-pink-100' : 'bg-white/20'
+                  ]"
                 ></div>
               </button>
               <button
@@ -213,13 +219,16 @@ onUnmounted(() => {
                 class="group relative px-6 py-3 rounded-xl text-sm font-medium transition-all duration-300 hover:scale-105"
                 :class="[
                   scrolled ? 'text-gray-700' : 'text-white',
-                  currentSection === 'acerca' ? 'text-purple-600 font-semibold' : ''
+                  currentSection === 'acerca' ? (scrolled ? 'text-purple-600' : 'text-white') + ' font-semibold' : ''
                 ]"
               >
                 <span class="relative z-10">Acerca de</span>
                 <div
-                  class="absolute inset-0 bg-gradient-to-r from-purple-100 to-pink-100 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-300 rounded-xl"
-                  :class="currentSection === 'acerca' ? 'opacity-100' : ''"
+                  class="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-300"
+                  :class="[
+                    currentSection === 'acerca' ? 'opacity-100' : '',
+                    scrolled ? 'bg-gradient-to-r from-purple-100 to-pink-100' : 'bg-white/20'
+                  ]"
                 ></div>
               </button>
               <button
@@ -227,13 +236,16 @@ onUnmounted(() => {
                 class="group relative px-6 py-3 rounded-xl text-sm font-medium transition-all duration-300 hover:scale-105"
                 :class="[
                   scrolled ? 'text-gray-700' : 'text-white',
-                  currentSection === 'contacto' ? 'text-purple-600 font-semibold' : ''
+                  currentSection === 'contacto' ? (scrolled ? 'text-purple-600' : 'text-white') + ' font-semibold' : ''
                 ]"
               >
                 <span class="relative z-10">Contacto</span>
                 <div
-                  class="absolute inset-0 bg-gradient-to-r from-purple-100 to-pink-100 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-300 rounded-xl"
-                  :class="currentSection === 'contacto' ? 'opacity-100' : ''"
+                  class="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-300"
+                  :class="[
+                    currentSection === 'contacto' ? 'opacity-100' : '',
+                    scrolled ? 'bg-gradient-to-r from-purple-100 to-pink-100' : 'bg-white/20'
+                  ]"
                 ></div>
               </button>
             </div>
