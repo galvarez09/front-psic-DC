@@ -113,7 +113,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-gray-50">
+    <div class="min-h-screen bg-gradient-to-br from-sky-50 via-white to-blue-50">
 
 
     <!-- Navegación Moderna -->
@@ -128,7 +128,7 @@ onUnmounted(() => {
             <div class="flex-shrink-0">
               <div class="flex items-center space-x-3">
                 <div
-                  class="w-10 h-10 bg-gradient-to-br from-purple-600 to-pink-600 rounded-xl flex items-center justify-center shadow-lg"
+                  class="w-10 h-10 bg-gradient-to-br from-blue-500 to-sky-500 rounded-xl flex items-center justify-center shadow-lg"
                 >
                   <svg
                     class="w-6 h-6 text-white"
@@ -149,7 +149,7 @@ onUnmounted(() => {
                     class="text-xl font-bold transition-all duration-300"
                     :class="
                       scrolled
-                        ? 'bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent'
+                        ? 'bg-gradient-to-r from-blue-600 to-sky-600 bg-clip-text text-transparent'
                         : 'text-white'
                     "
                   >
@@ -171,7 +171,7 @@ onUnmounted(() => {
             <div class="ml-10 flex items-baseline space-x-6 relative pb-3">
               <!-- Indicador de sección activa mejorado -->
               <div
-                class="absolute -bottom-1 h-1.5 bg-gradient-to-r from-purple-600 to-pink-600 transition-all duration-700 ease-out rounded-full shadow-lg"
+                class="absolute -bottom-1 h-1.5 bg-gradient-to-r from-blue-600 to-sky-500 transition-all duration-700 ease-out rounded-full shadow-lg"
                 :style="{
                   width: '90px',
                   transform: `translateX(${['inicio', 'servicios', 'acerca', 'contacto'].indexOf(currentSection) * 144}px)`
@@ -185,7 +185,7 @@ onUnmounted(() => {
                 class="group relative px-6 py-3 rounded-xl text-sm font-medium transition-all duration-300 hover:scale-105"
                 :class="[
                   scrolled ? 'text-gray-700' : 'text-white',
-                  currentSection === 'inicio' ? (scrolled ? 'text-purple-600' : 'text-white') + ' font-semibold' : ''
+                  currentSection === 'inicio' ? (scrolled ? 'text-blue-600' : 'text-white') + ' font-semibold' : ''
                 ]"
               >
                 <span class="relative z-10">Inicio</span>
@@ -193,7 +193,7 @@ onUnmounted(() => {
                   class="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-300"
                   :class="[
                     currentSection === 'inicio' ? 'opacity-100' : '',
-                    scrolled ? 'bg-gradient-to-r from-purple-100 to-pink-100' : 'bg-white/20'
+                    scrolled ? 'bg-gradient-to-r from-sky-100 to-sky-100' : 'bg-white/20'
                   ]"
                 ></div>
               </button>
@@ -202,7 +202,7 @@ onUnmounted(() => {
                 class="group relative px-6 py-3 rounded-xl text-sm font-medium transition-all duration-300 hover:scale-105"
                 :class="[
                   scrolled ? 'text-gray-700' : 'text-white',
-                  currentSection === 'servicios' ? (scrolled ? 'text-purple-600' : 'text-white') + ' font-semibold' : ''
+                  currentSection === 'servicios' ? (scrolled ? 'text-blue-600' : 'text-white') + ' font-semibold' : ''
                 ]"
               >
                 <span class="relative z-10">Servicios</span>
@@ -210,7 +210,7 @@ onUnmounted(() => {
                   class="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-300"
                   :class="[
                     currentSection === 'servicios' ? 'opacity-100' : '',
-                    scrolled ? 'bg-gradient-to-r from-purple-100 to-pink-100' : 'bg-white/20'
+                    scrolled ? 'bg-gradient-to-r from-sky-100 to-sky-100' : 'bg-white/20'
                   ]"
                 ></div>
               </button>
@@ -219,7 +219,7 @@ onUnmounted(() => {
                 class="group relative px-6 py-3 rounded-xl text-sm font-medium transition-all duration-300 hover:scale-105"
                 :class="[
                   scrolled ? 'text-gray-700' : 'text-white',
-                  currentSection === 'acerca' ? (scrolled ? 'text-purple-600' : 'text-white') + ' font-semibold' : ''
+                  currentSection === 'acerca' ? (scrolled ? 'text-blue-600' : 'text-white') + ' font-semibold' : ''
                 ]"
               >
                 <span class="relative z-10">Acerca de</span>
@@ -227,7 +227,7 @@ onUnmounted(() => {
                   class="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-300"
                   :class="[
                     currentSection === 'acerca' ? 'opacity-100' : '',
-                    scrolled ? 'bg-gradient-to-r from-purple-100 to-pink-100' : 'bg-white/20'
+                    scrolled ? 'bg-gradient-to-r from-sky-100 to-sky-100' : 'bg-white/20'
                   ]"
                 ></div>
               </button>
@@ -236,7 +236,7 @@ onUnmounted(() => {
                 class="group relative px-6 py-3 rounded-xl text-sm font-medium transition-all duration-300 hover:scale-105"
                 :class="[
                   scrolled ? 'text-gray-700' : 'text-white',
-                  currentSection === 'contacto' ? (scrolled ? 'text-purple-600' : 'text-white') + ' font-semibold' : ''
+                  currentSection === 'contacto' ? (scrolled ? 'text-blue-600' : 'text-white') + ' font-semibold' : ''
                 ]"
               >
                 <span class="relative z-10">Contacto</span>
@@ -244,7 +244,7 @@ onUnmounted(() => {
                   class="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-300"
                   :class="[
                     currentSection === 'contacto' ? 'opacity-100' : '',
-                    scrolled ? 'bg-gradient-to-r from-purple-100 to-pink-100' : 'bg-white/20'
+                    scrolled ? 'bg-gradient-to-r from-sky-100 to-sky-100' : 'bg-white/20'
                   ]"
                 ></div>
               </button>
@@ -256,11 +256,11 @@ onUnmounted(() => {
             <div class="ml-4 flex items-center space-x-3">
               <router-link
                 to="/menu-principal"
-                class="group relative px-6 py-2.5 rounded-xl text-sm font-semibold text-white transition-all duration-300 overflow-hidden bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                class="group relative px-6 py-2.5 rounded-xl text-sm font-semibold text-white transition-all duration-300 overflow-hidden bg-gradient-to-r from-blue-600 to-sky-500 hover:from-blue-700 hover:to-sky-600 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
               >
                 <span class="relative z-10">Menú Principal</span>
                 <div
-                  class="absolute inset-0 bg-gradient-to-r from-green-700 to-emerald-700 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  class="absolute inset-0 bg-gradient-to-r from-blue-700 to-sky-600 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                 ></div>
               </router-link>
               <router-link
@@ -268,8 +268,8 @@ onUnmounted(() => {
                 class="group relative px-6 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 overflow-hidden"
                 :class="
                   scrolled
-                    ? 'text-purple-600 hover:text-purple-700'
-                    : 'text-white hover:text-purple-200'
+                    ? 'text-blue-600 hover:text-blue-700'
+                    : 'text-white hover:text-sky-200'
                 "
               >
                 <span class="relative z-10">Iniciar Sesión</span>
@@ -279,11 +279,11 @@ onUnmounted(() => {
               </router-link>
               <router-link
                 to="/register"
-                class="group relative px-6 py-2.5 rounded-xl text-sm font-semibold text-white transition-all duration-300 overflow-hidden bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                class="group relative px-6 py-2.5 rounded-xl text-sm font-semibold text-white transition-all duration-300 overflow-hidden bg-gradient-to-r from-blue-600 to-sky-500 hover:from-blue-700 hover:to-sky-600 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
               >
                 <span class="relative z-10">Registrarse</span>
                 <div
-                  class="absolute inset-0 bg-gradient-to-r from-purple-700 to-emerald-700 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  class="absolute inset-0 bg-gradient-to-r from-blue-700 to-sky-600 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                 ></div>
               </router-link>
             </div>
@@ -329,12 +329,12 @@ onUnmounted(() => {
         >
           <button
             @click="() => { scrollToSection('inicio'); mobileMenuOpen = false; }"
-            class="group flex items-center px-4 py-3 rounded-xl text-base font-medium text-gray-700 hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 hover:text-purple-600 transition-all duration-300"
-            :class="currentSection === 'inicio' ? 'bg-gradient-to-r from-purple-50 to-pink-50 text-purple-600' : ''"
+            class="group flex items-center px-4 py-3 rounded-xl text-base font-medium text-gray-700 hover:bg-gradient-to-r hover:from-sky-50 hover:to-sky-50 hover:text-blue-600 transition-all duration-300"
+            :class="currentSection === 'inicio' ? 'bg-gradient-to-r from-sky-50 to-sky-50 text-blue-600' : ''"
           >
             <svg
               class="w-5 h-5 mr-3 transition-colors"
-              :class="currentSection === 'inicio' ? 'text-purple-600' : 'text-gray-400 group-hover:text-purple-600'"
+              :class="currentSection === 'inicio' ? 'text-blue-600' : 'text-gray-400 group-hover:text-blue-600'"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -350,12 +350,12 @@ onUnmounted(() => {
           </button>
           <button
             @click="() => { scrollToSection('servicios'); mobileMenuOpen = false; }"
-            class="group flex items-center px-4 py-3 rounded-xl text-base font-medium text-gray-700 hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 hover:text-purple-600 transition-all duration-300"
-            :class="currentSection === 'servicios' ? 'bg-gradient-to-r from-purple-50 to-pink-50 text-purple-600' : ''"
+            class="group flex items-center px-4 py-3 rounded-xl text-base font-medium text-gray-700 hover:bg-gradient-to-r hover:from-sky-50 hover:to-sky-50 hover:text-blue-600 transition-all duration-300"
+            :class="currentSection === 'servicios' ? 'bg-gradient-to-r from-sky-50 to-sky-50 text-blue-600' : ''"
           >
             <svg
               class="w-5 h-5 mr-3 transition-colors"
-              :class="currentSection === 'servicios' ? 'text-purple-600' : 'text-gray-400 group-hover:text-purple-600'"
+              :class="currentSection === 'servicios' ? 'text-blue-600' : 'text-gray-400 group-hover:text-blue-600'"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -371,12 +371,12 @@ onUnmounted(() => {
           </button>
           <button
             @click="() => { scrollToSection('acerca'); mobileMenuOpen = false; }"
-            class="group flex items-center px-4 py-3 rounded-xl text-base font-medium text-gray-700 hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 hover:text-purple-600 transition-all duration-300"
-            :class="currentSection === 'acerca' ? 'bg-gradient-to-r from-purple-50 to-pink-50 text-purple-600' : ''"
+            class="group flex items-center px-4 py-3 rounded-xl text-base font-medium text-gray-700 hover:bg-gradient-to-r hover:from-sky-50 hover:to-sky-50 hover:text-blue-600 transition-all duration-300"
+            :class="currentSection === 'acerca' ? 'bg-gradient-to-r from-sky-50 to-sky-50 text-blue-600' : ''"
           >
             <svg
               class="w-5 h-5 mr-3 transition-colors"
-              :class="currentSection === 'acerca' ? 'text-purple-600' : 'text-gray-400 group-hover:text-purple-600'"
+              :class="currentSection === 'acerca' ? 'text-blue-600' : 'text-gray-400 group-hover:text-blue-600'"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -392,12 +392,12 @@ onUnmounted(() => {
           </button>
           <button
             @click="() => { scrollToSection('contacto'); mobileMenuOpen = false; }"
-            class="group flex items-center px-4 py-3 rounded-xl text-base font-medium text-gray-700 hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 hover:text-purple-600 transition-all duration-300"
-            :class="currentSection === 'contacto' ? 'bg-gradient-to-r from-purple-50 to-pink-50 text-purple-600' : ''"
+            class="group flex items-center px-4 py-3 rounded-xl text-base font-medium text-gray-700 hover:bg-gradient-to-r hover:from-sky-50 hover:to-sky-50 hover:text-blue-600 transition-all duration-300"
+            :class="currentSection === 'contacto' ? 'bg-gradient-to-r from-sky-50 to-sky-50 text-blue-600' : ''"
           >
             <svg
               class="w-5 h-5 mr-3 transition-colors"
-              :class="currentSection === 'contacto' ? 'text-purple-600' : 'text-gray-400 group-hover:text-purple-600'"
+              :class="currentSection === 'contacto' ? 'text-blue-600' : 'text-gray-400 group-hover:text-blue-600'"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -414,12 +414,12 @@ onUnmounted(() => {
 
           <button
             @click="() => { scrollToSection('roles'); mobileMenuOpen = false; }"
-            class="group flex items-center px-4 py-3 rounded-xl text-base font-medium text-gray-700 hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 hover:text-purple-600 transition-all duration-300"
-            :class="currentSection === 'roles' ? 'bg-gradient-to-r from-purple-50 to-pink-50 text-purple-600' : ''"
+            class="group flex items-center px-4 py-3 rounded-xl text-base font-medium text-gray-700 hover:bg-gradient-to-r hover:from-sky-50 hover:to-sky-50 hover:text-blue-600 transition-all duration-300"
+            :class="currentSection === 'roles' ? 'bg-gradient-to-r from-sky-50 to-sky-50 text-blue-600' : ''"
           >
             <svg
               class="w-5 h-5 mr-3 transition-colors"
-              :class="currentSection === 'roles' ? 'text-purple-600' : 'text-gray-400 group-hover:text-purple-600'"
+              :class="currentSection === 'roles' ? 'text-blue-600' : 'text-gray-400 group-hover:text-blue-600'"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -436,7 +436,7 @@ onUnmounted(() => {
           <div class="pt-4 pb-2 border-t border-gray-200/50 space-y-2">
             <router-link
               to="/menu-principal"
-              class="w-full flex items-center px-4 py-3 rounded-xl text-base font-medium text-white bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 transition-all duration-300 shadow-lg"
+              class="w-full flex items-center px-4 py-3 rounded-xl text-base font-medium text-white bg-gradient-to-r from-blue-600 to-sky-500 hover:from-blue-700 hover:to-sky-600 transition-all duration-300 shadow-lg"
             >
               <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
@@ -450,10 +450,10 @@ onUnmounted(() => {
             </router-link>
             <router-link
               to="/login"
-              class="group w-full flex items-center px-4 py-3 rounded-xl text-base font-medium text-purple-600 hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 transition-all duration-300"
+              class="group w-full flex items-center px-4 py-3 rounded-xl text-base font-medium text-blue-600 hover:bg-gradient-to-r hover:from-sky-50 hover:to-sky-50 transition-all duration-300"
             >
               <svg
-                class="w-5 h-5 mr-3 text-purple-600"
+                class="w-5 h-5 mr-3 text-blue-600"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -469,7 +469,7 @@ onUnmounted(() => {
             </router-link>
             <router-link
               to="/register"
-              class="w-full flex items-center px-4 py-3 rounded-xl text-base font-medium text-white bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 transition-all duration-300 shadow-lg"
+              class="w-full flex items-center px-4 py-3 rounded-xl text-base font-medium text-white bg-gradient-to-r from-blue-600 to-sky-500 hover:from-blue-700 hover:to-sky-600 transition-all duration-300 shadow-lg"
             >
               <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
@@ -487,25 +487,27 @@ onUnmounted(() => {
     </nav>
 
     <!-- Hero Section -->
-    <section id="inicio" class="pt-20 gradient-hero text-white">
+    <section id="inicio" class="pt-20 gradient-hero text-white cloud-effect">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-        <div class="text-center fade-in">
-          <h1 class="text-4xl md:text-6xl font-bold mb-6">Consultorio Virtual de Psicología</h1>
-          <p class="text-xl md:text-2xl mb-8 text-purple-100">
+        <div class="text-center animate-fade-in-scale">
+          <h1 class="text-4xl md:text-6xl font-bold mb-6 text-gradient text-shadow animate-slide-in-up">
+            Consultorio Virtual de Psicología
+          </h1>
+          <p class="text-xl md:text-2xl mb-8 text-sky-100 animate-slide-in-up stagger-1">
             Cuidando tu bienestar mental desde la comodidad de tu hogar
           </p>
-          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <div class="flex flex-col sm:flex-row gap-4 justify-center animate-slide-in-up stagger-2">
             <router-link
               to="/menu-principal"
-              class="group relative px-8 py-3 rounded-xl font-semibold text-lg transition-all duration-300 overflow-hidden bg-white text-purple-600 hover:text-purple-700 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+              class="group relative px-8 py-3 rounded-xl font-semibold text-lg transition-all duration-300 overflow-hidden bg-white text-blue-600 hover:text-blue-700 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 btn-modern hover-glow"
             >
               <span class="relative z-10">Acceder al Menú</span>
               <div
-                class="absolute inset-0 bg-gradient-to-r from-purple-50 to-pink-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                class="absolute inset-0 bg-gradient-to-r from-sky-50 to-sky-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
               ></div>
             </router-link>
             <button
-              class="group relative px-8 py-3 rounded-xl font-semibold text-lg transition-all duration-300 overflow-hidden border-2 border-white text-white hover:text-purple-600 hover:bg-white transform hover:-translate-y-0.5"
+              class="group relative px-8 py-3 rounded-xl font-semibold text-lg transition-all duration-300 overflow-hidden border-2 border-white text-white hover:text-blue-600 hover:bg-white transform hover:-translate-y-0.5 btn-modern hover-glow"
             >
               <span class="relative z-10">Conoce Más</span>
             </button>
@@ -517,8 +519,8 @@ onUnmounted(() => {
     <!-- Servicios -->
     <section id="servicios" class="py-20 bg-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Nuestros Servicios</h2>
+        <div class="text-center mb-16 animate-slide-in-up">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 text-gradient">Nuestros Servicios</h2>
           <p class="text-xl text-gray-600 max-w-3xl mx-auto">
             Ofrecemos una amplia gama de servicios psicológicos para ayudarte en tu camino hacia el
             bienestar mental
@@ -527,10 +529,10 @@ onUnmounted(() => {
 
         <div class="grid md:grid-cols-3 gap-8">
           <div
-            class="bg-gradient-to-br from-purple-50 to-pink-50 p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow"
+            class="bg-gradient-to-br from-sky-50 to-sky-50 p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover-scale glass-card animate-slide-in-left stagger-1"
           >
             <div
-              class="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center mb-6 mx-auto"
+              class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mb-6 mx-auto hover-rotate animate-pulse-glow"
             >
               <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
@@ -552,7 +554,7 @@ onUnmounted(() => {
                 href="https://wa.me/51994971261?text=Hola,%20me%20interesa%20la%20Terapia%20Individual"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="inline-flex items-center px-4 py-2 bg-green-500 hover:bg-green-600 text-white text-sm font-medium rounded-lg transition-colors duration-300"
+                class="inline-flex items-center px-4 py-2 bg-sky-500 hover:bg-blue-600 text-white text-sm font-medium rounded-lg transition-colors duration-300"
               >
                 <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.87 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
@@ -563,10 +565,10 @@ onUnmounted(() => {
           </div>
 
           <div
-            class="bg-gradient-to-br from-blue-50 to-purple-50 p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow"
+            class="bg-gradient-to-br from-sky-50 to-blue-50 p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover-scale glass-card animate-slide-in-up stagger-2"
           >
             <div
-              class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mb-6 mx-auto"
+              class="w-16 h-16 bg-sky-500 rounded-full flex items-center justify-center mb-6 mx-auto"
             >
               <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
@@ -587,7 +589,7 @@ onUnmounted(() => {
                 href="https://wa.me/51994971261?text=Hola,%20me%20interesa%20la%20Terapia%20de%20Pareja"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="inline-flex items-center px-4 py-2 bg-green-500 hover:bg-green-600 text-white text-sm font-medium rounded-lg transition-colors duration-300"
+                class="inline-flex items-center px-4 py-2 bg-sky-500 hover:bg-blue-600 text-white text-sm font-medium rounded-lg transition-colors duration-300"
               >
                 <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.87 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
@@ -598,10 +600,10 @@ onUnmounted(() => {
           </div>
 
           <div
-            class="bg-gradient-to-br from-green-50 to-blue-50 p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow"
+            class="bg-gradient-to-br from-sky-50 to-blue-50 p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover-scale glass-card animate-slide-in-up stagger-2"
           >
             <div
-              class="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mb-6 mx-auto"
+              class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mb-6 mx-auto hover-rotate animate-pulse-glow"
             >
               <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
@@ -622,7 +624,7 @@ onUnmounted(() => {
                 href="https://wa.me/51994971261?text=Hola,%20me%20interesa%20el%20servicio%20de%20Manejo%20del%20Estrés"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="inline-flex items-center px-4 py-2 bg-green-500 hover:bg-green-600 text-white text-sm font-medium rounded-lg transition-colors duration-300"
+                class="inline-flex items-center px-4 py-2 bg-sky-500 hover:bg-blue-600 text-white text-sm font-medium rounded-lg transition-colors duration-300"
               >
                 <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.87 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
@@ -636,11 +638,11 @@ onUnmounted(() => {
     </section>
 
     <!-- Acerca de la Profesional -->
-    <section id="acerca" class="py-20 bg-gray-50">
+    <section id="acerca" class="py-20 bg-gradient-to-br from-sky-50 via-white to-blue-50 cloud-effect">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid md:grid-cols-2 gap-12 items-center">
-          <div>
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+          <div class="animate-slide-in-left">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6 text-gradient">
               Psicóloga Diana Campos
             </h2>
             <p class="text-lg text-gray-600 mb-6">
@@ -648,9 +650,9 @@ onUnmounted(() => {
               años de experiencia ayudando a personas a superar sus desafíos emocionales y mentales.
             </p>
             <div class="space-y-4">
-              <div class="flex items-center">
+              <div class="flex items-center animate-slide-in-up stagger-1">
                 <div
-                  class="w-6 h-6 bg-purple-600 rounded-full flex items-center justify-center mr-3"
+                  class="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center mr-3 hover-rotate animate-pulse-glow"
                 >
                   <svg
                     class="w-4 h-4 text-white"
@@ -670,7 +672,7 @@ onUnmounted(() => {
               </div>
               <div class="flex items-center">
                 <div
-                  class="w-6 h-6 bg-purple-600 rounded-full flex items-center justify-center mr-3"
+                  class="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center mr-3"
                 >
                   <svg
                     class="w-4 h-4 text-white"
@@ -690,7 +692,7 @@ onUnmounted(() => {
               </div>
               <div class="flex items-center">
                 <div
-                  class="w-6 h-6 bg-purple-600 rounded-full flex items-center justify-center mr-3"
+                  class="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center mr-3"
                 >
                   <svg
                     class="w-4 h-4 text-white"
@@ -710,11 +712,11 @@ onUnmounted(() => {
               </div>
             </div>
           </div>
-          <div class="text-center">
+          <div class="text-center animate-slide-in-right">
             <div
-              class="w-80 h-80 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full mx-auto flex items-center justify-center"
+              class="w-80 h-80 bg-gradient-to-br from-white to-sky-100 rounded-full mx-auto flex items-center justify-center shadow-2xl animate-float hover-scale"
             >
-              <div class="text-white text-6xl font-bold">DC</div>
+              <div class="text-blue-600 text-6xl font-bold text-gradient">DC</div>
             </div>
           </div>
         </div>
@@ -737,7 +739,7 @@ onUnmounted(() => {
             <div class="space-y-6">
               <div class="flex items-center">
                 <div
-                  class="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center mr-4"
+                  class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mr-4"
                 >
                   <svg
                     class="w-6 h-6 text-white"
@@ -761,7 +763,7 @@ onUnmounted(() => {
 
               <div class="flex items-center">
                 <div
-                  class="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center mr-4"
+                  class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mr-4"
                 >
                   <svg
                     class="w-6 h-6 text-white"
@@ -785,7 +787,7 @@ onUnmounted(() => {
 
               <div class="flex items-center">
                 <div
-                  class="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center mr-4"
+                  class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mr-4"
                 >
                   <svg
                     class="w-6 h-6 text-white"
@@ -810,7 +812,7 @@ onUnmounted(() => {
                   href="https://wa.me/51994971261?text=Hola,%20me%20gustaría%20agendar%20una%20consulta%20psicológica"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="ml-3 px-4 py-2 bg-green-500 hover:bg-green-600 text-white text-sm font-medium rounded-lg transition-colors duration-300 flex items-center space-x-2"
+                  class="ml-3 px-4 py-2 bg-sky-500 hover:bg-blue-600 text-white text-sm font-medium rounded-lg transition-colors duration-300 flex items-center space-x-2"
                 >
                   <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
@@ -828,26 +830,26 @@ onUnmounted(() => {
                 <label class="block text-sm font-medium text-gray-700 mb-2">Nombre</label>
                 <input
                   type="text"
-                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
                 />
               </div>
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
                 <input
                   type="email"
-                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
                 />
               </div>
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-2">Mensaje</label>
                 <textarea
                   rows="4"
-                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
                 ></textarea>
               </div>
               <button
                 type="submit"
-                class="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg font-semibold transition-colors"
+                class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold transition-colors"
               >
                 Enviar Mensaje
               </button>
@@ -865,7 +867,7 @@ onUnmounted(() => {
           :key="section"
           @click="scrollToSection(section)"
           class="group relative w-3 h-3 rounded-full transition-all duration-300"
-          :class="currentSection === section ? 'bg-purple-600 scale-125' : 'bg-gray-400 hover:bg-gray-600'"
+          :class="currentSection === section ? 'bg-blue-600 scale-125' : 'bg-gray-400 hover:bg-gray-600'"
         >
           <span
             class="absolute right-8 top-1/2 transform -translate-y-1/2 bg-gray-900 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap"
@@ -881,7 +883,7 @@ onUnmounted(() => {
       href="https://wa.me/51994971261?text=Hola,%20me%20gustaría%20agendar%20una%20consulta%20psicológica"
       target="_blank"
       rel="noopener noreferrer"
-      class="fixed bottom-6 left-6 w-14 h-14 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 hover:scale-110 transition-all duration-300 z-40 group"
+      class="fixed bottom-6 left-6 w-14 h-14 bg-sky-500 hover:bg-blue-600 text-white rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 hover:scale-110 transition-all duration-300 z-40 group"
     >
       <!-- Icono de WhatsApp -->
       <svg class="w-7 h-7 mx-auto mt-3.5" fill="currentColor" viewBox="0 0 24 24">
@@ -899,7 +901,7 @@ onUnmounted(() => {
     <button
       v-show="scrolled"
       @click="scrollToSection('inicio')"
-      class="fixed bottom-6 right-6 w-12 h-12 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 z-40"
+      class="fixed bottom-6 right-6 w-12 h-12 bg-gradient-to-r from-blue-600 to-sky-500 text-white rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 z-40"
     >
       <svg class="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
@@ -919,7 +921,7 @@ onUnmounted(() => {
         <div class="grid md:grid-cols-3 gap-8">
           <!-- Dashboard de Paciente -->
           <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-            <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center mb-6 mx-auto">
+            <div class="w-16 h-16 bg-gradient-to-br from-sky-500 to-sky-500 rounded-2xl flex items-center justify-center mb-6 mx-auto">
               <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
               </svg>
@@ -930,7 +932,7 @@ onUnmounted(() => {
             </p>
             <router-link
               to="/menu-principal"
-              class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-green-600 to-emerald-600 text-white font-semibold rounded-xl hover:from-green-700 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+              class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-sky-500 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-sky-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
             >
               Acceder como Paciente
               <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -941,7 +943,7 @@ onUnmounted(() => {
 
           <!-- Dashboard de Psicóloga -->
           <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-            <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center mb-6 mx-auto">
+            <div class="w-16 h-16 bg-gradient-to-br from-sky-500 to-sky-500 rounded-2xl flex items-center justify-center mb-6 mx-auto">
               <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
               </svg>
@@ -952,7 +954,7 @@ onUnmounted(() => {
             </p>
             <router-link
               to="/dashboard-psicologa"
-              class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-xl hover:from-purple-700 hover:to-pink-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+              class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-sky-500 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-sky-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
             >
               Acceder como Psicóloga
               <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -963,7 +965,7 @@ onUnmounted(() => {
 
           <!-- Dashboard de Administrador -->
           <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-            <div class="w-16 h-16 bg-gradient-to-br from-indigo-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6 mx-auto">
+            <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-sky-400 rounded-2xl flex items-center justify-center mb-6 mx-auto">
               <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
               </svg>
@@ -974,7 +976,7 @@ onUnmounted(() => {
             </p>
             <router-link
               to="/dashboard-admin"
-              class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 text-white font-semibold rounded-xl hover:from-indigo-700 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+              class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500 to-sky-400 text-white font-semibold rounded-xl hover:from-blue-600 hover:to-sky-500 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
             >
               Acceder como Admin
               <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -993,7 +995,7 @@ onUnmounted(() => {
             </p>
             <router-link
               to="/login"
-              class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-xl hover:from-purple-700 hover:to-pink-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+              class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-sky-500 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-sky-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
             >
               Ir al Login
               <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

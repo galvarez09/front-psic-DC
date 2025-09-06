@@ -1,14 +1,14 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-indigo-50 flex items-center justify-center p-4">
+  <div class="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-indigo-50 flex items-center justify-center p-4">
     <div class="max-w-md w-full">
       <!-- Logo y Título -->
       <div class="text-center mb-8">
-        <div class="w-20 h-20 bg-gradient-to-br from-purple-600 to-pink-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+        <div class="w-20 h-20 bg-gradient-to-br from-green-600 to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
           <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
           </svg>
         </div>
-        <h1 class="text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">
+        <h1 class="text-3xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mb-2">
           Consultorio Virtual
         </h1>
         <p class="text-gray-600">Inicia sesión con tu cuenta</p>
@@ -27,7 +27,7 @@
               v-model="form.email"
               type="email"
               required
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200"
               placeholder="tu@email.com"
               :disabled="authStore.cargando"
             />
@@ -43,7 +43,7 @@
               v-model="form.password"
               type="password"
               required
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200"
               placeholder="••••••••"
               :disabled="authStore.cargando"
             />
@@ -53,7 +53,7 @@
           <button
             type="submit"
             :disabled="authStore.cargando"
-            class="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-4 rounded-lg font-medium hover:from-purple-700 hover:to-pink-700 focus:ring-4 focus:ring-purple-200 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+            class="w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white py-3 px-4 rounded-lg font-medium hover:from-green-700 hover:to-emerald-700 focus:ring-4 focus:ring-green-200 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <div v-if="authStore.cargando" class="flex items-center justify-center space-x-2">
               <svg class="animate-spin h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
@@ -81,7 +81,7 @@
           <h3 class="text-sm font-medium text-gray-700 mb-3">Acceso por Roles:</h3>
           <div class="space-y-2 text-xs text-gray-600">
             <div class="flex items-center space-x-2">
-              <div class="w-2 h-2 bg-purple-500 rounded-full"></div>
+              <div class="w-2 h-2 bg-green-500 rounded-full"></div>
               <span><strong>Psicóloga:</strong> diana@consultorio.com</span>
             </div>
             <div class="flex items-center space-x-2">
@@ -102,7 +102,7 @@
         <div class="mt-6 text-center">
           <router-link
             to="/"
-            class="text-purple-600 hover:text-purple-700 text-sm font-medium transition-colors duration-200"
+            class="text-green-600 hover:text-green-700 text-sm font-medium transition-colors duration-200"
           >
             ← Volver al Inicio
           </router-link>

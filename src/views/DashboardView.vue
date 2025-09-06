@@ -1,14 +1,14 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-purple-50 via-white to-pink-50">
+    <div class="min-h-screen bg-gradient-to-br from-sky-50 via-white to-blue-50 cloud-effect">
     <!-- Navegación del Dashboard -->
-    <nav class="bg-white shadow-lg border-b border-gray-100">
+    <nav class="bg-white shadow-lg border-b border-gray-100 glass-enhanced">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-16">
           <div class="flex items-center">
             <div class="flex-shrink-0">
               <div class="flex items-center space-x-3">
                 <div
-                  class="w-8 h-8 bg-gradient-to-br from-purple-600 to-pink-600 rounded-lg flex items-center justify-center"
+                  class="w-8 h-8 bg-gradient-to-br from-blue-600 to-sky-500 rounded-lg flex items-center justify-center animate-pulse-glow hover-rotate"
                 >
                   <svg
                     class="w-5 h-5 text-white"
@@ -25,7 +25,7 @@
                   </svg>
                 </div>
                 <div>
-                  <h1 class="text-xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                  <h1 class="text-xl font-bold bg-gradient-to-r from-blue-600 to-sky-500 bg-clip-text text-transparent">
                     Mi Consultorio Virtual
                   </h1>
                   <p class="text-xs text-gray-500">Panel de Paciente</p>
@@ -36,7 +36,7 @@
 
           <div class="flex items-center space-x-4">
             <!-- Notificaciones -->
-            <button class="relative p-2 text-gray-600 hover:text-purple-600 transition-colors">
+              <button class="relative p-2 text-gray-600 hover:text-blue-600 transition-colors">
               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5v-5zM4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
               </svg>
@@ -53,8 +53,8 @@
                 :alt="userProfile.displayName"
                 class="w-8 h-8 rounded-full"
               />
-              <div v-else class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
-                <svg class="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div v-else class="w-8 h-8 bg-sky-100 rounded-full flex items-center justify-center">
+                  <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
               </div>
@@ -78,16 +78,16 @@
     <!-- Contenido del Dashboard -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <!-- Header con estadísticas -->
-      <div class="mb-8">
+      <div class="mb-8 animate-slide-in-up">
         <div class="flex flex-col md:flex-row md:items-center md:justify-between">
           <div>
-            <h2 class="text-2xl font-bold text-gray-900">¡Bienvenido, {{ userProfile?.displayName?.split(' ')[0] || 'Usuario' }}!</h2>
+            <h2 class="text-2xl font-bold text-gray-900 text-gradient">¡Bienvenido, {{ userProfile?.displayName?.split(' ')[0] || 'Usuario' }}!</h2>
             <p class="text-gray-600 mt-1">Gestiona tus consultas virtuales y tu bienestar mental</p>
           </div>
           <div class="mt-4 md:mt-0">
             <router-link
               to="/"
-              class="inline-flex items-center px-4 py-2 text-sm font-medium text-purple-600 bg-purple-50 rounded-lg hover:bg-purple-100 transition-colors"
+              class="inline-flex items-center px-4 py-2 text-sm font-medium text-blue-600 bg-sky-50 rounded-lg hover:bg-sky-100 transition-colors hover-scale btn-modern"
             >
               <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -101,8 +101,8 @@
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-6">
           <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
             <div class="flex items-center">
-              <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
-                <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div class="w-10 h-10 bg-sky-100 rounded-lg flex items-center justify-center">
+                <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
@@ -129,8 +129,8 @@
 
           <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
             <div class="flex items-center">
-              <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
-                <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div class="w-10 h-10 bg-sky-100 rounded-lg flex items-center justify-center">
+                <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
@@ -143,14 +143,14 @@
 
           <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
             <div class="flex items-center">
-              <div class="w-10 h-10 bg-pink-100 rounded-lg flex items-center justify-center">
-                <svg class="w-5 h-5 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div class="w-10 h-10 bg-sky-100 rounded-lg flex items-center justify-center">
+                <svg class="w-5 h-5 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                 </svg>
               </div>
               <div class="ml-3">
                 <p class="text-sm font-medium text-gray-500">Estado</p>
-                <p class="text-lg font-semibold text-green-600">Activo</p>
+                <p class="text-lg font-semibold text-blue-600">Activo</p>
               </div>
             </div>
           </div>
@@ -162,7 +162,7 @@
         <!-- Agendar nueva cita -->
         <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
           <div class="flex items-center mb-4">
-            <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-500 rounded-lg flex items-center justify-center">
+            <div class="w-12 h-12 bg-gradient-to-br from-sky-500 to-sky-500 rounded-lg flex items-center justify-center">
               <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
               </svg>
@@ -172,7 +172,7 @@
               <p class="text-sm text-gray-500">Programa tu próxima sesión</p>
             </div>
           </div>
-          <button class="w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white py-2 px-4 rounded-lg hover:from-green-700 hover:to-emerald-700 transition-all duration-200 font-medium">
+          <button class="w-full bg-gradient-to-r from-blue-600 to-sky-500 text-white py-2 px-4 rounded-lg hover:from-blue-700 hover:to-sky-600 transition-all duration-200 font-medium">
             Agendar Ahora
           </button>
         </div>
@@ -180,7 +180,7 @@
         <!-- Unirse a consulta -->
         <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
           <div class="flex items-center mb-4">
-            <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-lg flex items-center justify-center">
+            <div class="w-12 h-12 bg-gradient-to-br from-sky-500 to-blue-500 rounded-lg flex items-center justify-center">
               <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
               </svg>
@@ -190,7 +190,7 @@
               <p class="text-sm text-gray-500">Accede a tu sesión virtual</p>
             </div>
           </div>
-          <button class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-2 px-4 rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 font-medium">
+          <button class="w-full bg-gradient-to-r from-sky-500 to-blue-500 text-white py-2 px-4 rounded-lg hover:from-sky-600 hover:to-blue-600 transition-all duration-200 font-medium">
             Unirse Ahora
           </button>
         </div>
@@ -198,7 +198,7 @@
         <!-- Historial de sesiones -->
         <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
           <div class="flex items-center mb-4">
-            <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
+            <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-sky-500 rounded-lg flex items-center justify-center">
               <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
@@ -208,7 +208,7 @@
               <p class="text-sm text-gray-500">Revisa tus sesiones anteriores</p>
             </div>
           </div>
-          <button class="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-2 px-4 rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all duration-200 font-medium">
+          <button class="w-full bg-gradient-to-r from-blue-500 to-sky-400 text-white py-2 px-4 rounded-lg hover:from-blue-600 hover:to-sky-500 transition-all duration-200 font-medium">
             Ver Historial
           </button>
         </div>
@@ -218,7 +218,7 @@
       <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
         <div class="flex items-center justify-between mb-6">
           <h3 class="text-lg font-semibold text-gray-900">Próximas Consultas</h3>
-          <button class="text-purple-600 hover:text-purple-700 text-sm font-medium">Ver todas</button>
+          <button class="text-blue-600 hover:text-blue-700 text-sm font-medium">Ver todas</button>
         </div>
 
         <div v-if="upcomingSessions.length === 0" class="text-center py-8">
@@ -228,7 +228,7 @@
             </svg>
           </div>
           <p class="text-gray-500 mb-2">No tienes consultas programadas</p>
-          <button class="text-purple-600 hover:text-purple-700 font-medium">Agendar tu primera cita</button>
+          <button class="text-blue-600 hover:text-blue-700 font-medium">Agendar tu primera cita</button>
         </div>
 
         <div v-else class="space-y-4">
@@ -237,8 +237,8 @@
             :key="session.id"
             class="flex items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
           >
-            <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
-              <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="w-12 h-12 bg-sky-100 rounded-lg flex items-center justify-center">
+              <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
@@ -246,7 +246,7 @@
               <h4 class="font-medium text-gray-900">{{ session.title }}</h4>
               <p class="text-sm text-gray-500">{{ session.date }} - {{ session.time }}</p>
             </div>
-            <button class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors text-sm font-medium">
+            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">
               Unirse
             </button>
           </div>

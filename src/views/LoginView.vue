@@ -1,26 +1,26 @@
 <template>
   <div
-    class="min-h-screen bg-gradient-to-br from-purple-50 via-white to-pink-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
+    class="min-h-screen bg-gradient-to-br from-sky-50 via-white to-blue-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
   >
     <!-- Fondo decorativo -->
     <div class="absolute inset-0 overflow-hidden">
       <div
-        class="absolute -top-40 -right-40 w-80 h-80 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"
+        class="absolute -top-40 -right-40 w-80 h-80 bg-white rounded-full mix-blend-multiply filter blur-xl opacity-60 animate-blob"
       ></div>
       <div
-        class="absolute -bottom-40 -left-40 w-80 h-80 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"
+        class="absolute -bottom-40 -left-40 w-80 h-80 bg-sky-100 rounded-full mix-blend-multiply filter blur-xl opacity-50 animate-blob animation-delay-2000"
       ></div>
       <div
-        class="absolute top-40 left-40 w-80 h-80 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"
+        class="absolute top-40 left-40 w-80 h-80 bg-blue-100 rounded-full mix-blend-multiply filter blur-xl opacity-40 animate-blob animation-delay-4000"
       ></div>
     </div>
 
-    <div class="relative max-w-md w-full space-y-8">
+    <div class="relative max-w-md w-full space-y-8 animate-fade-in-scale">
       <!-- Logo y título -->
       <div class="text-center">
         <div class="flex justify-center mb-6">
           <div
-            class="w-16 h-16 bg-gradient-to-br from-purple-600 to-pink-600 rounded-2xl flex items-center justify-center shadow-lg"
+            class="w-16 h-16 bg-gradient-to-br from-blue-600 to-sky-500 rounded-2xl flex items-center justify-center shadow-lg animate-pulse-glow hover-rotate"
           >
             <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
@@ -32,25 +32,25 @@
             </svg>
           </div>
         </div>
-        <h2 class="text-3xl font-bold text-gray-900 mb-2">Bienvenido de vuelta</h2>
-        <p class="text-gray-600">Inicia sesión en tu cuenta del consultorio virtual</p>
+        <h2 class="text-3xl font-bold text-gray-900 mb-2 text-gradient animate-slide-in-up">Bienvenido de vuelta</h2>
+        <p class="text-gray-600 animate-slide-in-up stagger-1">Inicia sesión en tu cuenta del consultorio virtual</p>
       </div>
 
       <!-- Selector de método de autenticación -->
-      <div class="bg-white rounded-2xl shadow-xl p-6 space-y-6">
+      <div class="bg-white rounded-2xl shadow-xl p-6 space-y-6 glass-card animate-slide-in-up stagger-2">
         <!-- Tabs de autenticación -->
         <div class="flex space-x-1 bg-gray-100 p-1 rounded-xl">
           <button
             @click="authMethod = 'email'"
             class="flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-all duration-200"
-            :class="authMethod === 'email' ? 'bg-white text-purple-600 shadow-sm' : 'text-gray-600 hover:text-gray-900'"
+            :class="authMethod === 'email' ? 'bg-white text-blue-600 shadow-sm' : 'text-gray-600 hover:text-gray-900'"
           >
             Email y Contraseña
           </button>
           <button
             @click="authMethod = 'google'"
             class="flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-all duration-200"
-            :class="authMethod === 'google' ? 'bg-white text-purple-600 shadow-sm' : 'text-gray-600 hover:text-gray-900'"
+            :class="authMethod === 'google' ? 'bg-white text-blue-600 shadow-sm' : 'text-gray-600 hover:text-gray-900'"
           >
             Con Google
           </button>
@@ -74,7 +74,7 @@
                 v-model="form.email"
                 type="email"
                 required
-                class="appearance-none relative block w-full pl-10 pr-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm transition-all duration-200"
+                class="appearance-none relative block w-full pl-10 pr-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-xl focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500 focus:z-10 sm:text-sm transition-all duration-200"
                 placeholder="tu@email.com"
               />
             </div>
@@ -96,7 +96,7 @@
                 v-model="form.password"
                 :type="showPassword ? 'text' : 'password'"
                 required
-                class="appearance-none relative block w-full pl-10 pr-12 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm transition-all duration-200"
+                class="appearance-none relative block w-full pl-10 pr-12 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-xl focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500 focus:z-10 sm:text-sm transition-all duration-200"
                 placeholder="Tu contraseña"
               />
               <button
@@ -131,7 +131,7 @@
           <button
             @click="handleEmailSignIn"
             :disabled="loading || !form.email || !form.password"
-            class="group relative w-full flex justify-center items-center px-6 py-4 border border-transparent text-lg font-medium rounded-xl text-white bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+            class="group relative w-full flex justify-center items-center px-6 py-4 border border-transparent text-lg font-medium rounded-xl text-white bg-gradient-to-r from-blue-600 to-sky-500 hover:from-blue-700 hover:to-sky-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
           >
             <svg
               v-if="loading"
@@ -159,11 +159,11 @@
                 @click="selectedRole = 'paciente'"
                 class="flex items-center p-4 rounded-xl border-2 transition-all duration-200"
                 :class="selectedRole === 'paciente'
-                  ? 'border-purple-500 bg-purple-50 text-purple-700'
-                  : 'border-gray-200 hover:border-purple-300 hover:bg-purple-25'"
+                  ? 'border-sky-500 bg-sky-50 text-blue-700'
+                  : 'border-gray-200 hover:border-sky-300 hover:bg-green-25'"
               >
-                <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
-                  <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="w-10 h-10 bg-sky-100 rounded-lg flex items-center justify-center mr-4">
+                  <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                   </svg>
                 </div>
@@ -177,11 +177,11 @@
                 @click="selectedRole = 'psicologa'"
                 class="flex items-center p-4 rounded-xl border-2 transition-all duration-200"
                 :class="selectedRole === 'psicologa'
-                  ? 'border-purple-500 bg-purple-50 text-purple-700'
-                  : 'border-gray-200 hover:border-purple-300 hover:bg-purple-25'"
+                  ? 'border-sky-500 bg-sky-50 text-blue-700'
+                  : 'border-gray-200 hover:border-sky-300 hover:bg-green-25'"
               >
-                <div class="w-10 h-10 bg-pink-100 rounded-lg flex items-center justify-center mr-4">
-                  <svg class="w-5 h-5 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="w-10 h-10 bg-sky-100 rounded-lg flex items-center justify-center mr-4">
+                  <svg class="w-5 h-5 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                   </svg>
                 </div>
@@ -195,11 +195,11 @@
                 @click="selectedRole = 'admin'"
                 class="flex items-center p-4 rounded-xl border-2 transition-all duration-200"
                 :class="selectedRole === 'admin'
-                  ? 'border-purple-500 bg-purple-50 text-purple-700'
-                  : 'border-gray-200 hover:border-purple-300 hover:bg-purple-25'"
+                  ? 'border-sky-500 bg-sky-50 text-blue-700'
+                  : 'border-gray-200 hover:border-sky-300 hover:bg-green-25'"
               >
-                <div class="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center mr-4">
-                  <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+                  <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                   </svg>
                 </div>
@@ -215,7 +215,7 @@
           <button
             @click="handleGoogleSignIn"
             :disabled="loading || !selectedRole"
-            class="group relative w-full flex justify-center items-center px-6 py-4 border border-transparent text-lg font-medium rounded-xl text-white bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+            class="group relative w-full flex justify-center items-center px-6 py-4 border border-transparent text-lg font-medium rounded-xl text-white bg-gradient-to-r from-blue-600 to-sky-500 hover:from-blue-700 hover:to-sky-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
           >
             <svg
               v-if="loading"
@@ -262,7 +262,7 @@
             ¿No tienes cuenta?
             <router-link
               to="/register"
-              class="font-medium text-purple-600 hover:text-purple-500 transition-colors"
+              class="font-medium text-blue-600 hover:text-sky-500 transition-colors"
             >
               Regístrate aquí
             </router-link>
@@ -274,7 +274,7 @@
       <div class="text-center">
         <router-link
           to="/"
-          class="inline-flex items-center text-sm text-gray-600 hover:text-purple-600 transition-colors"
+          class="inline-flex items-center text-sm text-gray-600 hover:text-blue-600 transition-colors"
         >
           <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />

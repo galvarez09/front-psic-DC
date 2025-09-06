@@ -6,13 +6,13 @@
         <div class="flex justify-between items-center h-14 sm:h-16">
           <!-- Logo y Título -->
           <div class="flex items-center space-x-2 sm:space-x-3">
-            <div class="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-br from-purple-600 to-pink-600 rounded-lg flex items-center justify-center shadow-lg">
+            <div class="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-br from-blue-600 to-sky-500 rounded-lg flex items-center justify-center shadow-lg">
               <svg class="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
               </svg>
             </div>
             <div>
-              <h1 class="text-sm sm:text-lg font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+              <h1 class="text-sm sm:text-lg font-bold bg-gradient-to-r from-blue-600 to-sky-500 bg-clip-text text-transparent">
                 Psic. Diana Campos
               </h1>
               <p class="text-xs text-gray-500 hidden sm:block">Panel Profesional</p>
@@ -24,7 +24,7 @@
             <!-- Notificaciones -->
             <button
               @click="mostrarNotificaciones"
-              class="relative p-1.5 sm:p-2 text-gray-600 hover:text-purple-600 transition-colors"
+              class="relative p-1.5 sm:p-2 text-gray-600 hover:text-blue-600 transition-colors"
             >
               <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5v-5zM4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
@@ -37,7 +37,7 @@
             <!-- Botón Volver al Inicio -->
             <router-link
               to="/"
-              class="px-2 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm text-gray-700 hover:text-purple-600 transition-colors duration-300 border border-gray-300 rounded-lg hover:bg-gray-50 sm:border-none sm:rounded-none sm:hover:bg-transparent"
+              class="px-2 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm text-gray-700 hover:text-blue-600 transition-colors duration-300 border border-gray-300 rounded-lg hover:bg-gray-50 sm:border-none sm:rounded-none sm:hover:bg-transparent"
             >
               <span class="hidden sm:inline">Volver al Inicio</span>
               <span class="sm:hidden">Inicio</span>
@@ -55,7 +55,7 @@
             <!-- Menú hamburguesa para móviles -->
             <button
               @click="toggleMenuMobile"
-              class="lg:hidden p-1.5 text-gray-600 hover:text-purple-600 transition-colors"
+              class="lg:hidden p-1.5 text-gray-600 hover:text-blue-600 transition-colors"
             >
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -93,7 +93,7 @@
               @click="cambiarVista('dashboard')"
               class="w-full flex items-center space-x-3 px-3 py-2 text-left text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
             >
-              <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5v4m4-4v4m4-4v4M8 13v4m4-4v4m4-4v4"></path></svg>
               <span>Dashboard</span>
             </button>
@@ -111,7 +111,7 @@
               @click="cambiarVista('citas')"
               class="w-full flex items-center space-x-3 px-3 py-2 text-left text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
             >
-              <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
               <span>Gestionar Citas</span>
             </button>
@@ -129,7 +129,7 @@
               @click="cambiarVista('perfil')"
               class="w-full flex items-center space-x-3 px-3 py-2 text-left text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
             >
-              <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
               <span>Mi Perfil</span>
             </button>
@@ -163,7 +163,7 @@
               :key="item.id"
               @click="cambiarVista(item.vista)"
               class="w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200 text-left"
-              :class="vistaActiva === item.vista ? 'bg-purple-50 text-purple-700 border-r-2 border-purple-600' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'"
+              :class="vistaActiva === item.vista ? 'bg-sky-50 text-blue-700 border-r-2 border-blue-600' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'"
             >
               <!-- Iconos del sidebar -->
               <svg v-if="item.vista === 'dashboard'" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -194,7 +194,7 @@
             <div class="flex space-x-3">
               <button
                 @click="mostrarModalNuevaCita"
-                class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors duration-300 flex items-center space-x-2"
+                class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300 flex items-center space-x-2"
               >
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
@@ -235,8 +235,8 @@
                   <p class="text-sm font-medium text-gray-600">Pacientes Activos</p>
                   <p class="text-2xl font-bold text-gray-900">{{ estadisticas.pacientesActivos }}</p>
                 </div>
-                <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-                  <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="w-12 h-12 bg-sky-100 rounded-lg flex items-center justify-center">
+                  <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                 </div>
               </div>
@@ -248,8 +248,8 @@
                   <p class="text-sm font-medium text-gray-600">Sesiones Este Mes</p>
                   <p class="text-2xl font-bold text-gray-900">{{ estadisticas.sesionesMes }}</p>
                 </div>
-                <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
-                  <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="w-12 h-12 bg-sky-100 rounded-lg flex items-center justify-center">
+                  <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
                 </div>
               </div>
@@ -279,7 +279,7 @@
               <div class="space-y-4">
                 <div v-for="cita in proximasCitas" :key="cita.id" class="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 bg-gray-50 rounded-lg space-y-3 sm:space-y-0">
                   <div class="flex items-center space-x-4">
-                    <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-full flex items-center justify-center">
+                    <div class="w-12 h-12 bg-gradient-to-br from-sky-500 to-sky-500 rounded-full flex items-center justify-center">
                       <span class="text-white font-semibold">{{ cita.iniciales }}</span>
                     </div>
                     <div>
@@ -292,7 +292,7 @@
                     <p class="text-sm text-gray-600">{{ cita.hora }}</p>
                   </div>
                   <div class="flex space-x-2 w-full sm:w-auto">
-                    <button class="flex-1 sm:flex-none px-3 py-2 bg-green-100 text-green-800 rounded-lg text-sm font-medium hover:bg-green-200 transition-colors">
+                    <button class="flex-1 sm:flex-none px-3 py-2 bg-sky-100 text-blue-800 rounded-lg text-sm font-medium hover:bg-sky-200 transition-colors">
                       Iniciar Sesión
                     </button>
                     <button class="flex-1 sm:flex-none px-3 py-2 bg-red-100 text-red-800 rounded-lg text-sm font-medium hover:bg-red-200 transition-colors">
